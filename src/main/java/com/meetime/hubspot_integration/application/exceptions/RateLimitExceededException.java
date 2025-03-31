@@ -1,17 +1,17 @@
 package com.meetime.hubspot_integration.application.exceptions;
 
+import lombok.Getter;
+import lombok.Builder;
+
 import java.time.Duration;
 
-public class RateLimitExceededException extends HubSpotIntegrationException {
-
+@Getter
+@Builder
+public class RateLimitExceededException extends RuntimeException {
     private final Duration retryAfter;
 
     public RateLimitExceededException(Duration retryAfter) {
-        super("Rate limit exceeded. Try again after " + retryAfter.toSeconds() + " seconds");
+        super("HubSpot rate limit exceeded. Please retry after %d seconds".formatted(retryAfter.toSeconds()));
         this.retryAfter = retryAfter;
-    }
-
-    public Duration getRetryAfter() {
-        return retryAfter;
     }
 }
