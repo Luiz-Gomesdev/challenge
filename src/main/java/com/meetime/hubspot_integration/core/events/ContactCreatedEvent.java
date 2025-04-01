@@ -52,8 +52,4 @@ public record ContactCreatedEvent(
                 contact.getEmail()
         );
     }
-
-    public String getContactEmail() {
-        return contact.getEmail();
-    }
 }
