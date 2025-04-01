@@ -10,4 +10,3 @@ public interface OAuthUseCase {
     ResponseEntity<Map<String, Object>> callback(String authorizationCode) throws Exception;
     String refreshAccessToken(String refreshToken) throws Exception;
 }
-
