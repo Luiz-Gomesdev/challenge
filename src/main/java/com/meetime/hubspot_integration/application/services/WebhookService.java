@@ -8,6 +8,7 @@ import com.meetime.hubspot_integration.infrastructure.adapters.persistence.repos
 import com.meetime.hubspot_integration.infrastructure.config.AuthConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 @Slf4j
 @Service
 public class WebhookService implements WebhookUseCase {
@@ -22,7 +23,6 @@ public class WebhookService implements WebhookUseCase {
         this.webhookRepository = webhookRepository;
         this.authConfig = authConfig;
     }
-
 
     public void processWebHookEvents(String payload) throws Exception {
         WebhookEvent webhookEvent = new WebhookEvent();
