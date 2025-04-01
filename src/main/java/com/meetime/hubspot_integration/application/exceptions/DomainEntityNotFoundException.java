@@ -8,10 +8,10 @@ public class DomainEntityNotFoundException extends RuntimeException {
     private final String fieldName;
     private final String fieldValue;
 
-    protected DomainEntityNotFoundException() {
-        this.entityType = "Entity";
-        this.fieldName = "Unknown";
-        this.fieldValue = "N/A";
+    public DomainEntityNotFoundException() {
+        this.entityType = null;
+        this.fieldName = null;
+        this.fieldValue = null;
     }
 
     public DomainEntityNotFoundException(String entityType, String fieldName, String fieldValue) {
