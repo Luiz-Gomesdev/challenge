@@ -56,8 +56,4 @@ public record ContactCreatedEvent(
     public String getContactEmail() {
         return contact.getEmail();
     }
-
-    public String getContactHubSpotId() {
-        return contact.getHubspotId();
-    }
 }

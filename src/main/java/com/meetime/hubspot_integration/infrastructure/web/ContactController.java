@@ -19,15 +19,6 @@ public class ContactController {
 
     @PostMapping("/new-contact")
     public ResponseEntity<String> create(@Valid @RequestBody ContactDTO contactDTO) throws Exception {
-        return contactUseCase.createContact(
-                contactDTO.getHubspotId(),
-                contactDTO.getFirstName(),
-                contactDTO.getLastName(),
-                contactDTO.getEmail(),
-                contactDTO.getPhone(),
-                contactDTO.getCompany(),
-                contactDTO.getTags(),
-                contactDTO.getStatus()
-        );
+        return contactUseCase.createContact(contactDTO);
     }
 }
