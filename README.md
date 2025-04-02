@@ -27,7 +27,7 @@ Este projeto consiste na criação de uma API REST em Java, utilizando o framewo
 - **Swagger**: Interface interativa para testar a API.
 
 ## Arquitetura do Sistema
-c:\Users\lgome\Downloads\DOC MEETIME\kubernetes.jpg
+
 A arquitetura adotada é baseada em **Event-Driven Architecture (EDA)**, com componentes desacoplados que se comunicam via eventos. A **Arquitetura Hexagonal (Ports and Adapters)** garante a separação de responsabilidades, isolando a lógica de negócio das implementações externas, como APIs e bancos de dados.
 
 ## Diagramas e Fluxo
