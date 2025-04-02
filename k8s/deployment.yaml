@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hubspot-integration-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hubspot-integration
+  template:
+    metadata:
+      labels:
+        app: hubspot-integration
+    spec:
+      containers:
+        - name: hubspot-integration
+          image: hubspot-integration:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: hubspot-integration-config
+                  key: spring.datasource.url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: hubspot-integration-config
+                  key: spring.datasource.username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: hubspot-integration-config
+                  key: spring.datasource.password
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: hubspot-integration-config
+                  key: spring.kafka.bootstrap-servers

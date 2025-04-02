@@ -9,8 +9,7 @@ import java.util.List;
 public class WebhookEventMapper {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static WebhookEventDTO webhookEventConverter(String json) throws Exception {
-        List<WebhookEventDTO> payload = objectMapper.readValue(json, new TypeReference<List<WebhookEventDTO>>() {});
-        return payload.get(0);
+    public static List<WebhookEventDTO> webhookEventConverter(String json) throws Exception {
+        return objectMapper.readValue(json, new TypeReference<List<WebhookEventDTO>>() {});
     }
 }

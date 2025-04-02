@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WebhookEvent {
+public class Webhook {
 
     @Id
     @Column(name = "event_id")

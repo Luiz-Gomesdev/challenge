@@ -87,11 +87,15 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
+			<version>4.0.0-M1</version>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-test -->
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
+			<version>4.0.0-M1</version>
 			<scope>test</scope>
 		</dependency>
 

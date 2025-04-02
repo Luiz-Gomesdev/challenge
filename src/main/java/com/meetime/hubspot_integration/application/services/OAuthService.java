@@ -72,7 +72,7 @@ public class OAuthService implements OAuthUseCase {
         ResponseEntity<String> response = requestToken(requestBody);
 
         if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-            OAuthTokenDTO responseBody = OAuthTokenMapper.authConverter(response.getBody());
+            OAuthTokenDTO responseBody = OAuthTokenMapper.fromJsonToDto(response.getBody());
             OAuthToken token = OAuthToken.builder()
                     .accessToken(responseBody.getAccessToken())
                     .refreshToken(responseBody.getRefreshToken())
@@ -114,7 +114,7 @@ public class OAuthService implements OAuthUseCase {
 
     private String processTokenRefreshResponse(ResponseEntity<String> response, OAuthToken token) throws Exception {
         if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-            OAuthTokenDTO responseBody = OAuthTokenMapper.authConverter(response.getBody());
+            OAuthTokenDTO responseBody = OAuthTokenMapper.fromJsonToDto(response.getBody());
             token.setAccessToken(responseBody.getAccessToken());
             token.setRefreshToken(responseBody.getRefreshToken());
             token.setExpiresIn(responseBody.getExpiresIn());

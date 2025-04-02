@@ -1,6 +1,5 @@
 package com.meetime.hubspot_integration.infrastructure.config;
 
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -16,26 +15,38 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig {
 
-    @Value("${openapi.server.local}")
-    private String localUrl;
-
-    @Value("${openapi.server.prd}")
-    private String prdUrl;
+    private static final String API_TITLE = "HubSpot Integration API";
+    private static final String API_VERSION = "1.0.0";
+    private static final String API_DESCRIPTION = "HubSpot Integration API Documentation";
+    private static final String CONTACT_NAME = "Support";
+    private static final String CONTACT_EMAIL = "support@meetime.com";
+    private static final String LICENSE_NAME = "License name";
+    private static final String TERMS_OF_SERVICE = "Terms of Service";
 
     @Bean
-    public OpenAPI customOpenApi() {
+    public OpenAPI customOpenApi(
+            @Value("${openapi.server.local}") String localUrl,
+            @Value("${openapi.server.prd}") String prdUrl) {
+
         return new OpenAPI()
-                .info(new Info()
-                        .title("HubSpot Integration API")
-                        .version("1.0.0")
-                        .description("HubSpot Integration API Documentation")
-                        .contact(new Contact().name("Support").email("support@meetime.com"))
-                        .license(new License().name("License name").url("http://localhost:8080"))
-                        .termsOfService("Terms of Service")
-                )
-                .servers(List.of(
-                        new Server().url(localUrl).description("Local Environment"),
-                        new Server().url(prdUrl).description("Production Environment")
-                ));
+                .info(buildApiInfo())
+                .servers(buildServers(localUrl, prdUrl));
+    }
+
+    private Info buildApiInfo() {
+        return new Info()
+                .title(API_TITLE)
+                .version(API_VERSION)
+                .description(API_DESCRIPTION)
+                .contact(new Contact().name(CONTACT_NAME).email(CONTACT_EMAIL))
+                .license(new License().name(LICENSE_NAME))
+                .termsOfService(TERMS_OF_SERVICE);
+    }
+
+    private List<Server> buildServers(String localUrl, String prdUrl) {
+        return List.of(
+                new Server().url(localUrl).description("Local Environment"),
+                new Server().url(prdUrl).description("Production Environment")
+        );
     }
 }

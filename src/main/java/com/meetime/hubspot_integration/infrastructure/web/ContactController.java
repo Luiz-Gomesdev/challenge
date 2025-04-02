@@ -5,20 +5,29 @@ import com.meetime.hubspot_integration.application.ports.inbound.ContactUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/hubspot")
+@RequestMapping(ContactController.BASE_PATH)
 @RequiredArgsConstructor
 public class ContactController {
 
+    public static final String BASE_PATH = "/api/hubspot";
+    private static final String NEW_CONTACT_PATH = "/new-contact";
+
     private final ContactUseCase contactUseCase;
 
-    @PostMapping("/new-contact")
+    @PostMapping(NEW_CONTACT_PATH)
     public ResponseEntity<String> create(@Valid @RequestBody ContactDTO contactDTO) throws Exception {
-        return contactUseCase.createContact(contactDTO);
+        return contactUseCase.createContact(
+                contactDTO.getHubspotId(),
+                contactDTO.getFirstName(),
+                contactDTO.getLastName(),
+                contactDTO.getEmail(),
+                contactDTO.getPhone(),
+                contactDTO.getCompany(),
+                contactDTO.getTags(),
+                contactDTO.getStatus()
+        );
     }
 }
